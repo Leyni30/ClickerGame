@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import pictures from "./pictures.json";
-import picCard from "./picCard";
-import Wrapper from "./Wrapper";
-import Title from "./Title";
+import PicCard from "./components/PicCard/picCard";
+import Wrapper from "./components/Wrapper/Wrapper";
+import Title from "./components/Title/Title";
 
 
 class App extends React.Component {
@@ -12,11 +12,11 @@ class App extends React.Component {
   constructor(props) {
    super(props);
 
-    state = {
+    this.state = {
     score: 0,
     priorScore: 0,
     pictures: pictures
-
+ 
     } 
   }
 
@@ -32,7 +32,7 @@ class App extends React.Component {
         </div>
 
         {this.state.pictures.map((picture, index) => (
-          <picCard 
+          <PicCard 
           key = {index}
           image = {picture.image}
           index = {index}
@@ -59,15 +59,15 @@ class App extends React.Component {
      return a;
    }
 
-  handleClick(image){
+  handleClick(index){
     let {pictures, score, priorScore} = this.state;
 
     if(!pictures[index].clicked){
       pictures[index].clicked = true;
       score++;
     }else{
-      pictures = pictures.map((pictures, index) => {
-        pictures.clicked = false;
+      pictures = pictures.map((picture, index) => {
+        picture.clicked = false;
         return picture;
       });
 
